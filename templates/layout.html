@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href={{ url_for('static', filename='styles/global.css' ) }} />
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  {% block head %}{% endblock %}
+  <title>
+    {% block title %}{% endblock %}
+  </title>
+</head>
+
+<body>
+  <header>
+    <nav id="header">
+      <div class="nav-logo">
+        <p class="nav-name">Ashford</p>
+        <span>.</span>
+      </div>
+      <div class="nav-menu" id="myNavMenu">
+        <ul class="nav_menu_list">
+          <li class="nav_list">
+            <a href="/" class="nav-link {% if request.path == '/' %}active-link{% endif %}">Home</a>
+            <div class="circle"></div>
+          </li>
+          <li class="nav_list">
+            <a href="/about" class="nav-link {% if request.path == '/about' %}active-link{% endif %}">About</a>
+            <div class="circle"></div>
+          </li>
+          <li class="nav_list">
+            <a href="/projects" class="nav-link {% if request.path == '/projects' %}active-link{% endif %}">Projects</a>
+            <div class="circle"></div>
+          </li>
+          <li class="nav_list">
+            <a href="/contact" class="nav-link {% if request.path == '/contact' %}active-link{% endif %}">Contact</a>
+            <div class="circle"></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main class="container">
+    {% block body %}{% endblock %}
+  </main>
+
+  <footer>
+    <div class="top-footer">
+      <p>Ashford Fernandes .</p>
+    </div>
+    <div class="middle-footer">
+      <ul class="footer-menu">
+        <li class="footer_menu_list">
+          <a href="/">Home</a>
+        </li>
+        <li class="footer_menu_list">
+          <a href="/about">About</a>
+        </li>
+        <li class="footer_menu_list">
+          <a href="/projects">Projects</a>
+        </li>
+        <li class="footer_menu_list">
+          <a href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-social-icons">
+      <div class="icon"><i class="uil uil-instagram"></i></div>
+      <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
+      <div class="icon"><i class="uil uil-github-alt"></i></div>
+    </div>
+    <div class="bottom-footer">
+      <p>Copyright &copy; <a href="/" style="text-decoration: none;">Ashford Fernandes</a> - All rights reserved</p>
+    </div>
+  </footer>
+</body>
+
+</html>
