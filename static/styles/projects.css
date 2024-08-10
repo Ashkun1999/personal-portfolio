@@ -19,6 +19,7 @@
   border-radius: 20px;
   box-shadow: 1px 8px 10px 2px var(--first-shadow-color);
   overflow: hidden;
+  text-decoration: none;
 }
 
 .project-box>i {
@@ -30,6 +31,7 @@
 .project-box label {
   font-size: 15px;
   color: #777;
+  padding-inline: 2rem;
 }
 
 .project-box::after,
