@@ -2,7 +2,9 @@
 
 {% block head %}
 <link rel="stylesheet" href={{ url_for('static', filename='styles/contact.css' ) }} />
+<script src={{ url_for('static', filename='scripts/contact.js' ) }} defer></script>
 {% endblock %}
+
 {% block title %}Contact{% endblock %}
 
 {% block body %}
@@ -15,23 +17,33 @@
     <div class="col">
       <div class="contact-info">
         <h2>Find Me <i class="uil uil-corner-right-down"></i></h2>
-        <p><i class="uil uil-envelope"></i> Email: john@doe.com</p>
-        <p><i class="uil uil-phone"></i> Tel: +250 708 770 000</p>
+        <p><i class="uil uil-envelope"></i> Email: ashford.fernandes1111998@gmail.com</p>
+        <p><i class="uil uil-phone"></i> Tel: +353 830199754</p>
       </div>
     </div>
     <div class="col">
-      <div class="form-control">
-        <div class="form-inputs">
-          <input type="text" class="input-field" placeholder="Name">
-          <input type="text" class="input-field" placeholder="Email">
+      <form id="contact-form" action="/contact" method="post">
+        <div class="form-control">
+          <div class="form-inputs">
+            <div>
+              <input type="text" class="input-field" placeholder="Name" name="name">
+              <p id="error-name" class="error-text"></p>
+            </div>
+
+            <div>
+              <input type="text" class="input-field" placeholder="Email" name="email">
+              <p id="error-email" class="error-text"></p>
+            </div>
+          </div>
+          <div class="text-area">
+            <textarea placeholder="Message" name="message"></textarea>
+            <p id="error-message" class="error-text"></p>
+          </div>
+          <div class="form-button">
+            <button type="button" id="btn-send" class="btn">Send <i class="uil uil-message"></i></button>
+          </div>
         </div>
-        <div class="text-area">
-          <textarea placeholder="Message"></textarea>
-        </div>
-        <div class="form-button">
-          <button class="btn">Send <i class="uil uil-message"></i></button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </section>
