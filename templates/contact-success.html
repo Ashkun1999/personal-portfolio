@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href={{ url_for('static', filename='styles/contact.css' ) }} />
+{% endblock %}
+{% block title %}Success{% endblock %}
+
+{% block body %}
+<section class="section" id="contact">
+  <div class="top-header">
+    <h1>Hey, {{ name }}</h1>
+    <span>Thanks for reaching out!</span>
+
+    <div class="form-button">
+      <a href="/" class="btn btn-home">Go to Home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
