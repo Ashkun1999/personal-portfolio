@@ -3,7 +3,7 @@
 {% block head %}
 <link rel="stylesheet" href={{ url_for('static', filename='styles/admin.css' ) }} />
 {% endblock %}
-{% block title %}About{% endblock %}
+{% block title %}Admin{% endblock %}
 
 {% block body %}
 <section class="section" id="admin">
@@ -34,6 +34,31 @@
           {% endfor %}
         </tbody>
       </table>
+    </div>
+
+    <div>
+      <form id="projects-form" action="/admin" method="post">
+        <h2>Add Project</h2>
+        <div>
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" required />
+        </div>
+        <div>
+          <label for="description">Description</label>
+          <textarea name="description" id="description" required></textarea>
+        </div>
+        <div>
+          <label for="image">Icon (UIL icon name)</label>
+          <input type="text" name="icon" id="icon" required />
+        </div>
+        <div>
+          <label for="link">Link</label>
+          <input type="text" name="link" id="link" required />
+        </div>
+        <div>
+          <button type="submit">Add Project</button>
+        </div>
+      </form>
     </div>
   </div>
 

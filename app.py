@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String
+
 class Base(DeclarativeBase):
   pass
 
@@ -15,11 +15,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://portfolio_db_hrjv_user:Rh2
 # initialize the app with the extension
 db.init_app(app)
 
-class Messages(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str]
-    email: Mapped[str]
-    message: Mapped[str]
+from models import Messages, Projects
 
 with app.app_context():
     db.create_all()
@@ -45,11 +41,25 @@ def contact():
 
     return render_template("contact.html")
 
-@app.route("/admin")
+@app.route("/admin", methods=['GET', 'POST'])
 def admin():
     messages = db.session.execute(db.select(Messages).order_by(Messages.id)).scalars()
-    return render_template("admin.html", messages=messages)
+    
+    if request.method == 'POST':
+        new_project = Projects(
+            title=request.form['title'],
+            description=request.form['description'],
+            icon=request.form['icon'],
+            link=request.form['link']
+        )
+        db.session.add(new_project)
+        db.session.commit()
+
+    projects = db.session.execute(db.select(Projects).order_by(Projects.id)).scalars()
+
+    return render_template("admin.html", messages=messages, projects=projects)
 
 @app.route("/projects")
 def projects():
-    return render_template("projects.html")
+    projects = db.session.execute(db.select(Projects).order_by(Projects.id)).scalars()
+    return render_template("projects.html", projects=projects)

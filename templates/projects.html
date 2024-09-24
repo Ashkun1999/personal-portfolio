@@ -11,24 +11,13 @@
     <h1>Projects</h1>
   </div>
   <div class="project-container">
-
-    <a href="https://ashkun1999.github.io/barca/pages/" target="_blank" class="project-box">
-      <i class="uil uil-html5"></i>
-      <h3>Barca</h3>
-      <label>My website is based on a sports, most popular team Barcelona.</label>
-    </a>
-
-    <a href="https://ashkun1999.github.io/javascript-assignment/" target="_blank" class="project-box">
-      <i class="uil uil-java-script"></i>
-      <h3>Pokemon Fanpage</h3>
-      <label>An open-source website with information on Pokémon games, series, and a simple Pokedex using API calls.</label>
-    </a>
-    
-    <a href="https://personal-portfolio-tx43.onrender.com" target="_blank" class="project-box">
-      <i class="uil uil-suitcase"></i>
-      <h3>Personal Portfolio</h3>
-      <label>A personal portfolio website that showcases my projects, skills.</label>
-    </a>
+    {% for project in projects %}
+      <a href={{ project.link }} target="_blank" class="project-box">
+        <i class="uil {{ project.icon }}"></i>
+        <h3>{{ project.title }}</h3>
+        <label>{{ project.description }}</label>
+      </a>
+    {% endfor %}
   </div>
 </section>
 {% endblock %}
