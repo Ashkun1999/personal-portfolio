@@ -1,14 +1,25 @@
-.container {
+.admin-container {
   padding: 16px;
-  background-color: white;
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   width: 100%;
 }
 
-.container > div {
+@media screen and (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+  }
+}
+
+.admin-container > div {
   margin: 10px;
   padding: 10px;
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse;
   width: 100%;
 }
 
@@ -30,7 +41,7 @@ th {
 .actions {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .action {
@@ -40,6 +51,7 @@ th {
   cursor: pointer;
   width: 100%;
   border-radius: 5px;
+  width: 44px;
 }
 
 .action.edit {
@@ -49,4 +61,61 @@ th {
 
 .action.delete {
   background-color: #f44336;
+}
+
+.dialog-form, #projects-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dialog-form label, #projects-form label {
+  font-weight: bold;
+}
+.dialog-form input,
+.dialog-form textarea,
+#projects-form input,
+#projects-form textarea {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.dialog-buttons, #projects-form .form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+#editProjectDialog {
+  margin: auto;
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+}
+#editProjectDialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#editProjectDialog h2, #projects-form h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+#editProjectForm button, #projects-form button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+#editProjectForm button[type="submit"], #projects-form button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+}
+#editProjectForm button[type="button"] {
+  background-color: #f44336;
+  color: white;
 }

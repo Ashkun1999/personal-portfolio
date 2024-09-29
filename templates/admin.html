@@ -2,6 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href={{ url_for('static', filename='styles/admin.css' ) }} />
+<script src={{ url_for('static', filename='scripts/admin.js' ) }} defer></script>
 {% endblock %}
 {% block title %}Admin{% endblock %}
 
@@ -11,7 +12,7 @@
     <h1>Admin</h1>
   </div>
 
-  <div class="container">
+  <div class="admin-container">
     <div>
       <h2>Messages</h2>
       <table>
@@ -53,10 +54,16 @@
             <td>{{ project.title }}</td>
             <td>
               <div class="actions">
-                <button type="button" class="action edit" data-projectId="{{ project.id }}" title="Edit" >
+                <button type="button" class="action edit" 
+                  data-project-id="{{ project.id }}"
+                  data-project-title="{{ project.title }}"
+                  data-project-description="{{ project.description }}"
+                  data-project-icon="{{ project.icon }}"
+                  data-project-link="{{ project.link }}"
+                  title="Edit">
                   <i class="uil uil-pen"></i>
                 </button>
-                <button type="button" class="action delete" data-projectId="{{ project.id }}" title="Delete">
+                <button type="button" class="action delete" data-project-id="{{ project.id }}" title="Delete">
                   <i class="uil uil-trash-alt"></i>
                 </button>
               </div>
@@ -86,7 +93,7 @@
           <label for="link">Link</label>
           <input type="text" name="link" id="link" required />
         </div>
-        <div>
+        <div class="form-buttons">
           <button type="submit">Add Project</button>
         </div>
       </form>
@@ -94,18 +101,32 @@
   </div>
 
 </section>
-<script>
-  const deleteButtons = document.querySelectorAll('button.action.delete');
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', async (e) => {
-      const projectId = e.target.getAttribute('data-projectId');
-      const response = await fetch(`/projects/${projectId}`, {
-        method: 'DELETE',
-      });
-      if (response.ok) {
-        window.location.reload();
-      }
-    });
-  });
-</script>
+
+<dialog id="editProjectDialog">
+  <form id="editProjectForm" class="dialog-form">
+    <h2>Edit Project</h2>
+    <input type="hidden" id="editProjectId" name="id">
+    <div>
+      <label for="editTitle">Title</label>
+      <input type="text" name="title" id="editTitle" required />
+    </div>
+    <div>
+      <label for="editDescription">Description</label>
+      <textarea name="description" id="editDescription" required></textarea>
+    </div>
+    <div>
+      <label for="editIcon">Icon (UIL icon name)</label>
+      <input type="text" name="icon" id="editIcon" required />
+    </div>
+    <div>
+      <label for="editLink">Link</label>
+      <input type="text" name="link" id="editLink" required />
+    </div>
+    <div class="dialog-buttons">
+      <button type="button" id="cancelEdit">Cancel</button>
+      <button type="submit">Save Changes</button>
+    </div>
+  </form>
+</dialog>
+
 {% endblock %}
