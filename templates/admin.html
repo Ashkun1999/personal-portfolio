@@ -11,7 +11,7 @@
     <h1>Admin</h1>
   </div>
 
-  <div>
+  <div class="container">
     <div>
       <h2>Messages</h2>
       <table>
@@ -25,18 +25,49 @@
         </thead>
         <tbody>
           {% for message in messages %}
-            <tr>
-              <td>{{ message.id }}</td>
-              <td>{{ message.name }}</td>
-              <td>{{ message.email }}</td>
-              <td>{{ message.message }}</td>
-            </tr>
+          <tr>
+            <td>{{ message.id }}</td>
+            <td>{{ message.name }}</td>
+            <td>{{ message.email }}</td>
+            <td>{{ message.message }}</td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
 
     <div>
+      <h2>Projects</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for project in projects %}
+          <tr>
+            <td>{{ project.id }}</td>
+            <td>{{ project.title }}</td>
+            <td>
+              <div class="actions">
+                <button type="button" class="action edit" data-projectId="{{ project.id }}" title="Edit" >
+                  <i class="uil uil-pen"></i>
+                </button>
+                <button type="button" class="action delete" data-projectId="{{ project.id }}" title="Delete">
+                  <i class="uil uil-trash-alt"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <br />
+
       <form id="projects-form" action="/admin" method="post">
         <h2>Add Project</h2>
         <div>
@@ -63,4 +94,18 @@
   </div>
 
 </section>
+<script>
+  const deleteButtons = document.querySelectorAll('button.action.delete');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', async (e) => {
+      const projectId = e.target.getAttribute('data-projectId');
+      const response = await fetch(`/projects/${projectId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        window.location.reload();
+      }
+    });
+  });
+</script>
 {% endblock %}

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase
 
 class Base(DeclarativeBase):
   pass
@@ -45,7 +45,7 @@ def contact():
 def admin():
     messages = db.session.execute(db.select(Messages).order_by(Messages.id)).scalars()
     
-    if request.method == 'POST':
+    if request.method == 'POST': # Create a new project
         new_project = Projects(
             title=request.form['title'],
             description=request.form['description'],
@@ -63,3 +63,20 @@ def admin():
 def projects():
     projects = db.session.execute(db.select(Projects).order_by(Projects.id)).scalars()
     return render_template("projects.html", projects=projects)
+
+@app.route("/projects/<id>", methods=['DELETE'])
+def delete_project(id):
+    project = db.session.execute(db.select(Projects).where(Projects.id == id)).scalar_one()
+    db.session.delete(project)
+    db.session.commit()
+    return jsonify({"message": "Project deleted"})
+
+@app.route("/projects/<id>", methods=['PUT'])
+def update_project(id):
+    project = db.session.execute(db.select(Projects).where(Projects.id == id)).scalar_one()
+    project.title = request.json['title']
+    project.description = request.json['description']
+    project.icon = request.json['icon']
+    project.link = request.json['link']
+    db.session.commit()
+    return jsonify({"message": "Project updated"})
