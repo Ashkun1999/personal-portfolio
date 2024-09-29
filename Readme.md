@@ -3,6 +3,7 @@
 
 
 render link: https://personal-portfolio-tx43.onrender.com
+admin page: https://personal-portfolio-tx43.onrender.com/admin
 github-repo link: https://github.com/Ashkun1999/personal-portfolio
 
 
@@ -15,6 +16,7 @@ This is a personal portfolio website built using Flask, a lightweight web framew
 - **About Me**: Detailed information about my background, education, and skills.
 - **Projects**: A gallery of my projects with descriptions, technologies used, and links to live demos or repositories.
 - **Contact**: A contact form that allows users to send me messages directly.
+- **Admin Panel**: An admin panel that allows me to add, edit, or delete projects from the website and also view messages sent by users.
 
 ##  how to use..
 
